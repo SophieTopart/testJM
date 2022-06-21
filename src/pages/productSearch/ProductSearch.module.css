@@ -1,0 +1,26 @@
+.beautyImage {
+  height: 100%;
+}
+
+.bottonDiv {
+  height: 50vh;
+  background-color: #db0992;
+}
+
+.topBeauty {
+  display: flex;
+  flex-wrap: wrap;
+  height: 50vh;
+}
+
+.topDiv, .topDivBlue {
+  width: 50%;
+  height: 100%;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.topDivBlue {
+  background-color: #55d7ff;
+}/*# sourceMappingURL=ProductSearch.module.css.map */

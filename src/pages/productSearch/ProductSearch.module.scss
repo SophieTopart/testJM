@@ -1,0 +1,36 @@
+@import '../../assets/styles/variables.scss';
+
+.beautyImage {
+	height: 100%;
+	width: 100%;
+}
+
+.bottomDiv {
+	margin-top: 2rem;
+}
+
+.bottomSearch {
+	height: 50vh;
+	background-color: map_get($colors, 'pink');
+	display: flex;
+	justify-content: center;
+}
+
+.topBeauty {
+	display: flex;
+	flex-wrap: wrap;
+	height: 50vh;
+}
+
+.topDiv {
+	width: 50%;
+	height: 100%;
+	font-weight: bold;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&Blue {
+		@extend .topDiv;
+		background-color: map_get($colors, 'blue');
+	}
+}
