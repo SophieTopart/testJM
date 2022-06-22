@@ -4,6 +4,7 @@ import BeautyProducts from '../../assets/images/beauty-products.jpg'
 import styles from './ProductSearch.module.scss'
 import Button from '../../components/Button/Button'
 import Input from '../../components/Input/Input'
+// import PaginationItem from '../../components/Pagination/Pagination'
 
 interface ISearchData {
 	brand: string
@@ -14,14 +15,14 @@ interface ISearchData {
 
 function ProductSearch() {
 	const [inputData, setInputData] = useState('')
-	const slicedData = inputData && inputData.toLowerCase().split(' ').join('+')
+	const splitData = inputData && inputData.toLowerCase().split(' ').join('+')
 
 	const [searchData, setSearchData] = useState<ISearchData[]>()
 
 	const getData = async () => {
 		try {
 			const response = await axios.get<ISearchData[]>(
-				`https://thawing-scrubland-03171.herokuapp.com/https://skincare-api.herokuapp.com/product?q=${slicedData}`
+				`https://thawing-scrubland-03171.herokuapp.com/https://skincare-api.herokuapp.com/product?q=${splitData}`
 			)
 			setSearchData(response.data)
 		} catch (err) {
@@ -33,7 +34,12 @@ function ProductSearch() {
 		setInputData(e.target.value)
 	}
 
-	console.log(searchData)
+	const slicedData = searchData && searchData.slice(0, 15)
+
+	const firstLetterToUpperCase = (string: string) => {
+		return string.charAt(0).toUpperCase() + string.slice(1)
+	}
+
 	return (
 		<>
 			<div className={styles.topBeauty}>
@@ -55,18 +61,25 @@ function ProductSearch() {
 						value={inputData}
 						onChange={(e) => changeInputValue(e)}
 					/>
-					<Button onClick={() => getData()} name='Search' />
+					<Button
+						onClick={() => getData()}
+						name='Search'
+						disabled={!inputData}
+					/>
 				</div>
 				<div>
 					<ul>
-						{searchData &&
-							searchData.map((item, index) => (
+						{slicedData &&
+							slicedData.map((item, index) => (
 								<li className={styles.listItem} key={index}>
-									{item.brand} - {item.name}
+									{firstLetterToUpperCase(item.brand)} -{' '}
+									{firstLetterToUpperCase(item.name)}
 								</li>
 							))}
+						{slicedData?.length === 0 && <p>No product found</p>}
 					</ul>
 				</div>
+				{/* {searchData && <PaginationItem total={searchData.length} />} */}
 			</div>
 		</>
 	)

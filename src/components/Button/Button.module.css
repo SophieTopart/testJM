@@ -8,4 +8,9 @@
 }
 .button:hover {
   background-color: #47b5d6;
+}
+@media (max-width: 576px) {
+  .button {
+    margin-top: 1rem;
+  }
 }/*# sourceMappingURL=Button.module.css.map */

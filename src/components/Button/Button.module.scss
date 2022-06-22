@@ -10,4 +10,7 @@
 	&:hover {
 		background-color: map_get($colors, 'deeperBlue');
 	}
+	@media (max-width: map_get($grid-breakpoints, 'sm')) {
+		margin-top: 1rem;
+	}
 }
