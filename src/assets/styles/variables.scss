@@ -1,4 +1,14 @@
 $colors: (
 	'blue': #55d7ff,
 	'pink': #db0992,
+	'deeperBlue': #47b5d6,
+);
+
+$grid-breakpoints: (
+	xs: 0,
+	sm: 576px,
+	md: 768px,
+	lg: 1025px,
+	xl: 1200px,
+	xxl: 1400px,
 );

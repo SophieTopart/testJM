@@ -1,0 +1,13 @@
+@import '../../assets/styles/variables.scss';
+
+.button {
+	height: 2rem;
+	width: 5rem;
+	border: none;
+	border-radius: 5px;
+	margin-left: 2rem;
+	background-color: map_get($colors, 'blue');
+	&:hover {
+		background-color: map_get($colors, 'deeperBlue');
+	}
+}

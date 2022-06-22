@@ -1,16 +1,33 @@
 .beautyImage {
   height: 100%;
+  width: 100%;
 }
 
-.bottonDiv {
+.bottomDiv {
+  margin-top: 2rem;
+}
+
+.bottomSearch {
   height: 50vh;
   background-color: #db0992;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.listItem {
+  color: white;
 }
 
 .topBeauty {
   display: flex;
-  flex-wrap: wrap;
   height: 50vh;
+}
+@media (max-width: 768px) {
+  .topBeauty {
+    height: 70vh;
+    flex-direction: column;
+  }
 }
 
 .topDiv, .topDivBlue {
@@ -23,4 +40,10 @@
 }
 .topDivBlue {
   background-color: #55d7ff;
+}
+@media (max-width: 768px) {
+  .topDiv, .topDivBlue {
+    width: 100%;
+    height: 50%;
+  }
 }/*# sourceMappingURL=ProductSearch.module.css.map */
