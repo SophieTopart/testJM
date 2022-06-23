@@ -1,4 +1,11 @@
+@import '../../assets/styles/variables.scss';
+
 .pagination {
 	display: flex;
 	list-style: none;
+	justify-content: center;
+	align-items: center;
+	background-color: map_get($colors, 'pink');
+	height: 100%;
+	width: 100vw;
 }

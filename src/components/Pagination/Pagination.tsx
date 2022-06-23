@@ -2,20 +2,32 @@ import Pagination from 'rc-pagination'
 import styles from './Pagination.module.scss'
 
 interface IPaginationItem {
-	total: number
+	total: number | undefined
+	current: number
+	pageSize: number
+	onChange: (p: number) => void
 }
 
-const PaginationItem = ({ total }: IPaginationItem) => {
+const PaginationItem = ({
+	total,
+	current,
+	pageSize,
+	onChange,
+}: IPaginationItem) => {
 	return (
-		<Pagination
-			prevIcon
-			nextIcon
-			className={styles.pagination}
-			pageSize={10}
-			simple
-			defaultCurrent={1}
-			total={total}
-		/>
+		<div>
+			<Pagination
+				prevIcon='< '
+				nextIcon=' >'
+				className={styles.pagination}
+				pageSize={pageSize}
+				simple
+				defaultCurrent={1}
+				current={current}
+				total={total}
+				onChange={onChange}
+			/>
+		</div>
 	)
 }
 
