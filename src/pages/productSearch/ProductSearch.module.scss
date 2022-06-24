@@ -11,7 +11,7 @@
 }
 
 .bottomSearch {
-	height: 50vh;
+	min-height: 50vh;
 	background-color: map_get($colors, 'pink');
 	display: flex;
 	flex-direction: column;

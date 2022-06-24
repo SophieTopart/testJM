@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, useEffect } from 'react'
 import axios from 'axios'
 import BeautyProducts from '../../assets/images/beauty-products.jpg'
 import styles from './ProductSearch.module.scss'
@@ -16,14 +16,19 @@ interface ISearchData {
 function ProductSearch() {
 	const [inputQuery, setInputQuery] = useState('')
 	const splitQuery = inputQuery && inputQuery.toLowerCase().split(' ').join('+')
-
 	const [searchData, setSearchData] = useState<ISearchData[]>()
 
+	// PAGINATION
+	const [collection, setCollection] = useState<ISearchData[]>()
 	const [currentPage, setCurrentPage] = useState(1)
 	const [itemsPerPage] = useState(15)
-	const [collection, setCollection] = useState(
-		searchData?.slice(0, itemsPerPage)
-	)
+	const updatePage = (p: number) => {
+		setCurrentPage(p)
+		const to = itemsPerPage * p
+		const from = to - itemsPerPage
+		setCollection(searchData?.slice(from, to))
+	}
+	const lastPage = !searchData ? 1 : Math.ceil(searchData.length / itemsPerPage)
 
 	const getData = async () => {
 		try {
@@ -31,12 +36,16 @@ function ProductSearch() {
 				`https://thawing-scrubland-03171.herokuapp.com/https://skincare-api.herokuapp.com/product?q=${splitQuery}`
 			)
 			setSearchData(response.data)
-			setCollection(searchData?.slice(0, itemsPerPage))
 			setCurrentPage(1)
 		} catch (err) {
 			console.error(err)
 		}
 	}
+
+	useEffect(
+		() => setCollection(searchData?.slice(0, itemsPerPage)),
+		[searchData, itemsPerPage]
+	)
 
 	const changeInputValue = (e: ChangeEvent<HTMLInputElement>) => {
 		setInputQuery(e.target.value)
@@ -44,14 +53,6 @@ function ProductSearch() {
 
 	const firstLetterToUpperCase = (string: string) => {
 		return string.charAt(0).toUpperCase() + string.slice(1)
-	}
-
-	// PAGINATION
-	const updatePage = (p: number) => {
-		setCurrentPage(p)
-		const to = itemsPerPage * p
-		const from = to - itemsPerPage
-		setCollection(searchData?.slice(from, to))
 	}
 
 	return (
@@ -93,8 +94,10 @@ function ProductSearch() {
 						{collection?.length === 0 && <p>No product found</p>}
 					</ul>
 				</div>
-				{collection && (
+				{collection?.length !== 0 && (
 					<PaginationItem
+						prevIcon={currentPage === 1 ? ' ' : '< '}
+						nextIcon={currentPage === lastPage ? ' ' : ' >'}
 						current={currentPage}
 						pageSize={itemsPerPage}
 						total={searchData?.length}

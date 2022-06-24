@@ -6,6 +6,8 @@ interface IPaginationItem {
 	current: number
 	pageSize: number
 	onChange: (p: number) => void
+	prevIcon: string
+	nextIcon: string
 }
 
 const PaginationItem = ({
@@ -13,12 +15,14 @@ const PaginationItem = ({
 	current,
 	pageSize,
 	onChange,
+	prevIcon,
+	nextIcon,
 }: IPaginationItem) => {
 	return (
 		<div>
 			<Pagination
-				prevIcon='< '
-				nextIcon=' >'
+				prevIcon={prevIcon}
+				nextIcon={nextIcon}
 				className={styles.pagination}
 				pageSize={pageSize}
 				simple
@@ -26,6 +30,18 @@ const PaginationItem = ({
 				current={current}
 				total={total}
 				onChange={onChange}
+				locale={{
+					items_per_page: 'Items per page',
+					jump_to: 'Jump to',
+					jump_to_confirm: 'Jump to confirm',
+					page: 'page',
+					prev_page: 'Previous page',
+					next_page: 'Next page',
+					prev_5: 'Previos 5 pages',
+					next_5: 'Next 5 pages',
+					prev_3: 'Previos 3 pages',
+					next_3: 'Next 3 pages',
+				}}
 			/>
 		</div>
 	)

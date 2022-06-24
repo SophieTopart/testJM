@@ -5,12 +5,12 @@
 	width: 5rem;
 	border: none;
 	border-radius: 5px;
-	margin-left: 2rem;
+	margin: 0 0 0 2rem;
 	background-color: map_get($colors, 'blue');
 	&:hover {
 		background-color: map_get($colors, 'deeperBlue');
 	}
 	@media (max-width: map_get($grid-breakpoints, 'sm')) {
-		margin-top: 1rem;
+		margin: 1rem 2rem 0 2rem;
 	}
 }
